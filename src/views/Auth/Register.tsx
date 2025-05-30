@@ -6,6 +6,7 @@ import AuthLayout from "@/components/layout/AuthLayout";
 import Input from "@/components/ui/Input";
 import Button from "@/components/ui/Button";
 import { registerUser, registerWithGoogle } from "@/api/authService";
+import RegisterImage from "@/assets/LoginIllustrationImage.png";
 
 const RegisterPage: React.FC = () => {
   const navigate = useNavigate();
@@ -54,7 +55,7 @@ const RegisterPage: React.FC = () => {
 
   return (
     <AuthLayout
-      illustrationSrc="/src/assets/RegisterIllustrationImage.png"
+      illustrationSrc={RegisterImage}
       illustrationAlt="Register Illustration"
     >
       <div className="max-w-md mx-auto">

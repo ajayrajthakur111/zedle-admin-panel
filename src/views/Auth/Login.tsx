@@ -6,6 +6,7 @@ import Button from "@/components/ui/Button";
 import Checkbox from "@/components/ui/Checkbox";
 import Input from "@/components/ui/Input";
 import { getProfile, loginUser, loginWithGoogle } from "@/api/authService";
+import loginImage from '@/assets/LoginIllustrationImage.png'
 
 const LoginPage: React.FC = () => {
   const navigate = useNavigate();
@@ -47,7 +48,7 @@ const LoginPage: React.FC = () => {
 
   return (
     <AuthLayout
-      illustrationSrc="/src/assets/LoginIllustrationImage.png"
+      illustrationSrc={loginImage}
       illustrationAlt="Login Illustration"
     >
       <div className="max-w-md mx-auto">
