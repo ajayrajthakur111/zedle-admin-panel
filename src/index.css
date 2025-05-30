@@ -1,0 +1,342 @@
+@import "tailwindcss"; /* Imports Tailwind v4 base, components, utilities, variants */
+@import "tailwindcss/theme"
+  /* @import "tw-animate-css"; /* Optional: Keep if you plan to use animations from this library */
+  /* Custom variant for dark mode - keep for future, but we won't define .dark variables yet */
+  @custom-variant dark (&: is(.dark *));
+
+/*
+  Map our CSS variables to Tailwind's theme system.
+  This allows using classes like bg-background, text-primary, border-ui-border etc.
+*/
+@theme inline {
+  /* Radii - We can keep this structure if you want consistent border radiuses */
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  /* Semantic Colors Mapped to Tailwind Theme */
+  --color-background: var(--zedle-bg-page); /* Main page background */
+  --color-foreground: var(--zedle-text-primary); /* Default text color */
+
+  --color-card: var(--zedle-bg-card); /* Card, table, input backgrounds */
+  --color-card-foreground: var(--zedle-text-primary); /* Text on cards */
+
+  --color-popover: var(--zedle-bg-card); /* Popover backgrounds */
+  --color-popover-foreground: var(--zedle-text-primary); /* Text on popovers */
+
+  --color-primary: var(--zedle-brand-purple-default); /* Main brand color */
+  --color-primary-foreground: var(
+    --zedle-brand-purple-text-on-primary
+  ); /* Text on top of primary color (e.g., white) */
+
+  --color-secondary: var(
+    --zedle-brand-purple-light
+  ); /* A secondary/accent color, could be lighter purple */
+  --color-secondary-foreground: var(
+    --zedle-text-primary
+  ); /* Text on top of secondary color */
+
+  --color-muted: var(--zedle-bg-muted); /* Muted backgrounds */
+  --color-muted-foreground: var(--zedle-text-muted); /* Muted text */
+
+  --color-accent: var(
+    --zedle-accent-default
+  ); /* An accent color (could be a different shade of purple or another color) */
+  --color-accent-foreground: var(--zedle-text-on-accent); /* Text on accent */
+
+  --color-destructive: var(
+    --zedle-status-danger
+  ); /* For error states, delete buttons */
+  --color-destructive-foreground: var(
+    --zedle-brand-purple-text-on-primary
+  ); /* Text on destructive color (likely white) */
+
+  --color-success: var(--zedle-status-success); /* For success states */
+  --color-success-foreground: var(
+    --zedle-brand-purple-text-on-primary
+  ); /* Text on success color (likely white) */
+
+  --color-border: var(--zedle-ui-border); /* Default border color */
+  --color-input: var(--zedle-ui-border); /* Input field border color */
+  --color-ring: var(
+    --zedle-brand-purple-default
+  ); /* Focus ring color (often the primary brand color) */
+
+  /* Specific to Zedle's Sidebar */
+  --color-sidebar: var(--zedle-sidebar-bg);
+  --color-sidebar-foreground: var(--zedle-sidebar-text);
+  --color-sidebar-active-bg: var(--zedle-sidebar-active-bg);
+  --color-sidebar-active-foreground: var(--zedle-sidebar-active-text);
+  --color-sidebar-border: var(
+    --zedle-sidebar-border
+  ); /* If sidebar has internal borders */
+
+  --color-modal-A: var(--zedle-bg-modal-A);
+  --color-modal-B: var(--zedle-bg-modal-B);
+  --color-modal-C: var(--zedle-bg-modal-C);
+  --color-modal-D: var(--zedle-bg-modal-D);
+
+
+
+
+
+ --gradient-purple-start: var(--zedle-gradient-purple-start);
+  --gradient-purple-end: var(--zedle-gradient-purple-end);
+  --gradient-purple-hover-start: var(--zedle-gradient-purple-hover-start);
+  --gradient-purple-hover-end: var(--zedle-gradient-purple-hover-end);
+
+  --gradient-green-start: var(--zedle-gradient-green-start);
+  --gradient-green-end: var(--zedle-gradient-green-end);
+  --gradient-green-hover-start: var(--zedle-gradient-green-hover-start);
+  --gradient-green-hover-end: var(--zedle-gradient-green-hover-end);
+
+  --gradient-blue-start: var(--zedle-gradient-blue-start);
+  --gradient-blue-end: var(--zedle-gradient-blue-end);
+  --gradient-blue-hover-start: var(--zedle-gradient-blue-hover-start);
+  --gradient-blue-hover-end: var(--zedle-gradient-blue-hover-end);
+
+  --gradient-red-start: var(--zedle-gradient-red-start);
+  --gradient-red-end: var(--zedle-gradient-red-end);
+  --gradient-red-hover-start: var(--zedle-gradient-red-hover-start);
+  --gradient-red-hover-end: var(--zedle-gradient-red-hover-end);
+
+  --button-secondary-bg: var(--zedle-button-secondary-bg);
+  --button-secondary-text: var(--zedle-button-secondary-text);
+  --button-secondary-border: var(--zedle-button-secondary-border);
+  --button-secondary-hover-bg: var(--zedle-button-secondary-hover-bg);
+
+
+}
+
+/* Define CSS Variables for Light Mode (Zedle Admin) */
+:root {
+  /* Base Radius - Adjust as per your design's typical corner rounding */
+  --radius: 0.5rem; /* e.g., 8px. Your design seems to use varied radii, this is a base. */
+
+  /* Page & General UI */
+  --zedle-bg-page: #f9fafb; /* Light gray main page background */
+  --zedle-bg-card: #f3f2f3; /* White for cards, tables, inputs */
+  --zedle-bg-muted: #f3f4f6; /* A slightly darker muted background */
+
+  --zedle-bg-modal-A: linear-gradient(
+    to bottom #a91895,
+    #800c78
+  ); /* Modal background, can be a gradient or solid color */
+  --zedle-bg-modal-B: gradient(
+    left to right,
+    #a91895,
+    #800c78
+  ); /* Another modal background variant */
+  --zedle-bg-modal-C: gradient(
+    bottom to top,
+    #a91895,
+    #800c78
+  ); /* Another modal background variant */
+  --zedle-bg-modal-D: gradient(
+    right to left,
+    #a91895,
+    #800c78
+  ); /* Another modal background variant */
+
+  --zedle-text-primary: #360329; /* Dark gray for primary text */
+  --zedle-text-secondary: #6b7280; /* Medium gray for secondary/muted text */
+  --zedle-text-muted: #9ca3af; /* Lighter gray for very muted text */
+
+  --zedle-ui-border: #e5e7eb; /* Light gray for borders */
+
+  /* Brand Colors (Zedle Purple) */
+  --zedle-brand-purple-default: #5d1049;
+  --zedle-brand-purple-light: #ca259eeb; /* For hover, lighter accents */
+  --zedle-brand-purple-dark: #360329; /* For active states, or darker text if needed */
+  --zedle-brand-purple-text-on-primary: #ffffff; /* White text on purple backgrounds */
+
+  /* Accent Color (Can be a different shade or another distinct color from your palette) */
+  /* For now, let's use the light purple as an accent. You can change this. */
+  --zedle-accent-default: var(--zedle-brand-purple-light);
+  --zedle-text-on-accent: #ffffff;
+
+  /* Status Colors */
+  --zedle-status-success: #059669; /* A distinct green from your "Verify", "Edit" buttons */
+  --zedle-status-danger: #dc2626; /* A distinct red from your "Reject", "Delete" icons/buttons */
+  /* Add --zedle-status-warning, --zedle-status-info if you have them */
+
+  /* Sidebar Specific Colors */
+  --zedle-sidebar-bg: var(--zedle-brand-purple-default);
+  --zedle-sidebar-text: #ffffff;
+  --zedle-sidebar-icon: #ffffff; /* Icons on sidebar */
+  --zedle-sidebar-active-bg: var(
+    --zedle-brand-purple-light
+  ); /* Or a different color/opacity */
+  --zedle-sidebar-active-text: #ffffff;
+  --zedle-sidebar-border: var(
+    --zedle-brand-purple-dark
+  ); /* e.g., for a subtle separator if needed */
+
+  /* Chart Colors (Placeholder - extract from your dashboard charts) */
+  --chart-1: #3b82f6; /* Blue */
+  --chart-2: #10b981; /* Green */
+  --chart-3: #f59e0b; /* Amber */
+  --chart-4: #ef4444; /* Red */
+  --chart-5: #8b5cf6; /* Violet */
+
+
+
+
+
+
+
+  /* Button Gradients (approximated from screenshot) */
+  /* Purple Gradient (e.g., Fetch Data, Performance Metrics) */
+  --zedle-gradient-purple-start: #ca259e; /* A brighter, pinkish purple (like --zedle-brand-purple-light) */
+  --zedle-gradient-purple-end: #5d1049;   /* Your default darker purple (like --zedle-brand-purple-default) */
+  --zedle-gradient-purple-hover-start: #ad1f89; /* Slightly darker/richer for hover */
+  --zedle-gradient-purple-hover-end: #4a0d3b;   /* Slightly darker/richer for hover */
+
+  /* Green Gradient (e.g., Resolved, Track) */
+  --zedle-gradient-green-start: #22c55e; /* A vibrant green, slightly lighter */
+  --zedle-gradient-green-end: #059669;    /* Your --zedle-status-success or similar */
+  --zedle-gradient-green-hover-start: #1da851; /* Slightly darker for hover */
+  --zedle-gradient-green-hover-end: #047857;   /* Slightly darker for hover */
+
+  /* Blue Gradient (e.g., Re-Assign - can be subtle or more pronounced) */
+  --zedle-gradient-blue-start: #3b82f6; /* Standard blue */
+  --zedle-gradient-blue-end: #2563eb;   /* Slightly darker blue */
+  --zedle-gradient-blue-hover-start: #2471e0;
+  --zedle-gradient-blue-hover-end: #1c51b8;
+
+  /* Red Gradient (e.g., Reject - can be subtle or more pronounced) */
+  --zedle-gradient-red-start: #ef4444; /* Standard red */
+  --zedle-gradient-red-end: #dc2626;   /* Slightly darker red */
+  --zedle-gradient-red-hover-start: #e03a3a;
+  --zedle-gradient-red-hover-end: #c01f1f;
+
+  /* For the "View Complaints" button style */
+  --zedle-button-secondary-bg: #ffffff; /* White background */
+  --zedle-button-secondary-text: var(--zedle-brand-purple-default);
+  --zedle-button-secondary-border: #d8b4fe; /* A lighter purple for border, or var(--zedle-brand-purple-light) with opacity */
+  --zedle-button-secondary-hover-bg: #f5f3ff; /* Very light purple hover */
+}
+
+
+
+
+
+
+/*
+  Base Layer Styles
+  These are global styles applied to base HTML elements.
+*/
+@layer base {
+  /*
+    Global border and outline for accessibility and consistency.
+    The original had `border-border outline-ring/50`.
+    Consider if you want ALL elements to have a border by default.
+    It might be better to apply borders specifically where needed.
+    For now, I'll remove the global border on *
+  */
+  * {
+    @apply box-border; /* Ensure padding and border are included in the element's total width and height */
+    /* @apply outline-ring/50; /* Optional: default focus outline using your ring color */
+  }
+
+  body {
+    @apply bg-background text-foreground; /* Uses --zedle-bg-page and --zedle-text-primary via @theme mapping */
+    font-family: "Poppins", sans-serif; /* DEFAULT FONT - Your screens use Poppins and Nunito */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color:#360329
+  }
+
+  /* Reset default button styling for consistency with Tailwind */
+  button,
+  [type="button"],
+  [type="reset"],
+  [type="submit"] {
+    -webkit-appearance: button;
+    background-color: transparent;
+    background-image: none;
+    border: none; /* Remove default borders */
+    padding: 0; /* Remove default padding */
+    cursor: pointer;
+  }
+
+  /* Basic heading styles (can be overridden by utilities) */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Poppins", sans-serif; /* Headings primarily use Poppins */
+    @apply font-semibold text-foreground; /* Use primary text color */
+  }
+
+  /* Default link styling - using a muted color, can be overridden */
+  a {
+    @apply text-muted-foreground hover:text-foreground transition-colors;
+    /* Or use your brand color: @apply text-primary hover:text-primary/80 */
+  }
+}
+
+/*
+  Custom Utility Classes specific to Zedle Admin
+  (Examples based on your provided file and common needs)
+*/
+
+/* Font specific utilities (if you need to switch fonts often) */
+.font-poppins {
+  font-family: "Poppins", sans-serif;
+}
+.font-nunito {
+  font-family: "Nunito", sans-serif;
+}
+
+/* Example of a custom scrollbar - you can keep or remove */
+.sleak-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: var(--zedle-brand-purple-light) transparent; /* Themed scrollbar */
+}
+.sleak-scroll::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.sleak-scroll::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background: transparent; /* Or a very subtle color like var(--zedle-bg-muted) */
+}
+.sleak-scroll::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: var(--zedle-brand-purple-light); /* Themed scrollbar thumb */
+}
+.sleak-scroll::-webkit-scrollbar-thumb:hover {
+  background: var(--zedle-brand-purple-default);
+}
+
+/* Add any other custom utilities you identified, like .custom-th etc.,
+   but try to achieve styling with Tailwind utilities first.
+   If a pattern is very repetitive and complex, then a custom class is good.
+*/
+.custom-th {
+  font-family: "Poppins", sans-serif;
+  @apply font-semibold text-sm text-foreground align-bottom;
+  /* color: #121744; /* This specific color might become --zedle-text-table-header */
+}
+
+/*
+  Component Layer (Optional)
+  You can define base styles for components here if needed,
+  though often it's better to style components directly with utilities
+  or within their own component files (e.g., using CSS Modules or styled-components approach if not purely Tailwind).
+*/
+/*
+@layer components {
+  .btn-primary {
+    @apply bg-primary text-primary-foreground px-4 py-2 rounded-lg hover:bg-primary/90;
+  }
+}
+*/
+
+.text-purple {
+  color: var(--zedle-brand-purple-light);
+}
