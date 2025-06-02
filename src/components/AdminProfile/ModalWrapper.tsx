@@ -61,7 +61,7 @@ export const ModalWrapper: FC<ModalWrapperProps> = ({
           </div>
           <h3 className="text-lg font-semibold text-white truncate">{title}</h3>
           <button onClick={onClose} className="p-1.5 rounded hover:bg-white/10">
-            <X size={20} className="text-white" />
+        <X size={20} className="text-white" />
           </button>
         </div>
         <div className="p-5 overflow-y-auto flex-grow scrollbar-thin scrollbar-thumb-white/30 scrollbar-track-transparent">

@@ -24,16 +24,16 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed }) => {
 
   const menuItems = [
     { icon: LayoutDashboard, label: "Dashboard", path: "" },
-    { icon: ShoppingCart,    label: "Orders",    path: "orders" },
-    { icon: Calendar,        label: "Bookings",  path: "bookings" },
-    { icon: Users,           label: "Users",     path: "users" },
-    { icon: Store,           label: "Vendors",   path: "vendors" },
-    { icon: Truck,           label: "Delivery Agents", path: "delivery" },
-    { icon: Ticket,          label: "Coupons",   path: "coupons" },
-    { icon: Megaphone,       label: "Promotions",path: "promotions" },
-    { icon: FileText,        label: "Terms & Policies", path: "terms" },
-    { icon: Info,            label: "About Us",  path: "about" },
-    { icon: Phone,           label: "Contact Us",path: "contact" },
+    { icon: ShoppingCart, label: "Orders", path: "orders" },
+    { icon: Calendar, label: "Bookings", path: "bookings" },
+    { icon: Users, label: "Users", path: "users" },
+    { icon: Store, label: "Vendors", path: "vendors" },
+    { icon: Truck, label: "Delivery Agents", path: "delivery" },
+    { icon: Ticket, label: "Coupons", path: "coupons" },
+    { icon: Megaphone, label: "Promotions", path: "promotions" },
+    { icon: FileText, label: "Terms & Policies", path: "terms" },
+    { icon: Info, label: "About Us", path: "about" },
+    { icon: Phone, label: "Contact Us", path: "contact" },
   ];
 
   return (
@@ -42,7 +42,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed }) => {
         flex-shrink-0                  
         sticky top-16 z-20             
         h-[calc(100vh-4rem)]         
-        bg-gradient-to-b from-[var(--color-primary)] to-[var(--color-secondary)] from-80% to-100%
+        sidebar
         text-white shadow-xl
         transition-all duration-300 ease-in-out
         ${isCollapsed ? "w-0 overflow-hidden" : "w-64"}
@@ -51,7 +51,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed }) => {
       <nav
         className={`
           h-full flex flex-col py-6
-          transition-opacity duration-200
+          transition-opacity duration-400
           ${isCollapsed ? "opacity-0" : "opacity-100"}
         `}
       >
@@ -66,23 +66,27 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed }) => {
                   onClick={() => navigate(fullPath)}
                   className={`
                     w-full flex items-center gap-3 px-3 py-3 rounded-lg
-                    transition-all duration-200 relative
+                    transition-all duration-400 relative group
                     ${
                       isActive
-                        ? "bg-[var(--zedle-brand-purple-dark)] text-white font-medium translate-x-2 border-b-2 border-white"
-                        : "hover:bg-[var(--zedle-brand-purple-dark)] text-purple-100 hover:text-white"
+                        ? "bg-primary text-white font-medium border-b-3 border-gray-300"
+                        : "hover:bg-primary text-white font-medium hover:border-b-3 border-gray-300 hover:text-white"
                     }
                   `}
                 >
                   <Icon
                     size={20}
-                    className={`transition-transform duration-200 ${
-                      !isActive ? "group-hover:translate-x-1" : ""
+                    className={`transition-transform duration-400 ${
+                      isActive 
+                        ? "translate-x-2" 
+                        : "group-hover:translate-x-2"
                     }`}
                   />
                   <span
-                    className={`font-medium transition-transform duration-200 ${
-                      !isActive ? "group-hover:translate-x-1" : ""
+                    className={`font-medium transition-transform duration-400 ${
+                      isActive 
+                        ? "translate-x-2" 
+                        : "group-hover:translate-x-2"
                     }`}
                   >
                     {label}

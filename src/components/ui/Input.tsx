@@ -8,16 +8,16 @@ const Input: React.FC<InputProps> = ({
   wrapperClassName = "",
   ...props
 }) => (
-  <div className={`mb-4 ${wrapperClassName}`}>
+  <div className={` ${wrapperClassName}`}>
     <label
       htmlFor={id}
-      className="block text-primary font-bold text-text-secondary mb-1"
+      className="block text-primary font-bold mb-1"
     >
       {label}
     </label>
     <input
       id={id}
-      className="w-full px-4 py-3 border rounded-md focus:ring-2  focus:border-transparent outline-none transition-colors"
+      className="w-full px-4 py-3 border rounded-md focus:ring-2 text-primary  focus:border-transparent outline-none transition-colors"
       {...props}
     />
   </div>

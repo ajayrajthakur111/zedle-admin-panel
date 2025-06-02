@@ -87,7 +87,7 @@ const Button: React.FC<ButtonProps> = ({
   const lighterShadow = "shadow-sm hover:shadow-md";
 
   const variantStyles: Record<ButtonVariant, string> = {
-    primaryHorizontalGradient: `bg-gradient-to-r from-[var(--gradient-purple-start)] to-[var(--gradient-purple-end)] text-primary-foreground hover:from-[var(--gradient-purple-hover-start)] hover:to-[var(--gradient-purple-hover-end)] focus:ring-primary ${defaultShadow} justify-center`,
+    primaryHorizontalGradient: ` bg-gradient-to-r from-[var(--gradient-purple-start)] to-[var(--gradient-purple-end)] text-primary hover:from-[var(--gradient-purple-hover-start)] hover:to-[var(--gradient-purple-hover-end)] focus:ring-0  ${defaultShadow} justify-center`,
     primarySolid: `bg-primary text-primary-foreground hover:bg-primary/90 focus:ring-primary ${defaultShadow} justify-center`,
     // For "View Complaints"
     secondary: `bg-[var(--button-secondary-bg)] text-[var(--button-secondary-text)] border border-[var(--button-secondary-border)] hover:bg-[var(--button-secondary-hover-bg)] focus:ring-primary ${lighterShadow} justify-center`,
@@ -98,7 +98,7 @@ const Button: React.FC<ButtonProps> = ({
     // Solid Blue for Re-Assign
     infoSolid: `bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-500 ${defaultShadow} justify-center`, // Using a common blue
     // Preview
-    ghost: `bg-transparent text-primary hover:bg-primary/10 focus:ring-primary shadow-none active:translate-y-0 justify-center`,
+    ghost: `bg-primary/20 text-primary hover:bg-primary/10 focus:ring-primary shadow-none active:translate-y-0 justify-center`,
     // Location button
     customLocation: `bg-green-100 text-primary hover:bg-green-200 focus:ring-primary font-semibold ${lighterShadow} justify-center`,
     // Select Category

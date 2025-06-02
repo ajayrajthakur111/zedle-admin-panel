@@ -8,6 +8,7 @@ import { DeliveryAgentsPage } from "@/views/Delivery/DeliveryAgentsPage";
 import { NotFoundPage } from "@/views/NotFoundPage/NotFoundPage";
 import { OrdersPage } from "@/views/Orders/OrdersPage";
 import { PromotionsPage } from "@/views/Promotions/PromotionsPage";
+import ReportsPage from "@/views/Reports/ReportsPage";
 import { TermsAndPoliciesPage } from "@/views/TermsAndPolicies/TermsAndPoliciesPage";
 import { UsersPage } from "@/views/Users/UsersPage";
 import { VendorsPage } from "@/views/Vendors/VendorsPage";
@@ -19,6 +20,7 @@ export const DashboardRoute = () => {
       <Layout>
         <Routes>
           <Route index element={<DashboardPage />} />
+          <Route path="reports" element={<ReportsPage />} />
           <Route path="orders" element={<OrdersPage />} />
           <Route path="bookings" element={<BookingsPage />} />
           <Route path="users" element={<UsersPage />} />

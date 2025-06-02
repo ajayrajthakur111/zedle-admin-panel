@@ -6,7 +6,7 @@ import Button from "@/components/ui/Button";
 import Checkbox from "@/components/ui/Checkbox";
 import Input from "@/components/ui/Input";
 import { getProfile, loginUser, loginWithGoogle } from "@/api/authService";
-import loginImage from '@/assets/LoginIllustrationImage.png'
+import loginImage from '@/assets/LoginIllustration.svg'
 
 const LoginPage: React.FC = () => {
   const navigate = useNavigate();

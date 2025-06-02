@@ -6,7 +6,7 @@ import AuthLayout from "@/components/layout/AuthLayout";
 import Input from "@/components/ui/Input";
 import Button from "@/components/ui/Button";
 import { registerUser, registerWithGoogle } from "@/api/authService";
-import RegisterImage from "@/assets/LoginIllustrationImage.png";
+import RegisterImage from "@/assets/RegisterIllustration.svg";
 
 const RegisterPage: React.FC = () => {
   const navigate = useNavigate();
