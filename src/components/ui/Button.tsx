@@ -87,7 +87,7 @@ const Button: React.FC<ButtonProps> = ({
   const lighterShadow = "shadow-sm hover:shadow-md";
 
   const variantStyles: Record<ButtonVariant, string> = {
-    primaryHorizontalGradient: ` bg-gradient-to-r from-[var(--gradient-purple-start)] to-[var(--gradient-purple-end)] text-primary hover:from-[var(--gradient-purple-hover-start)] hover:to-[var(--gradient-purple-hover-end)] focus:ring-0  ${defaultShadow} justify-center`,
+    primaryHorizontalGradient: `text-white bg-gradient-to-r from-[var(--gradient-purple-start)] to-[var(--gradient-purple-end)]  hover:from-[var(--gradient-purple-hover-start)] hover:to-[var(--gradient-purple-hover-end)] focus:ring-0  ${defaultShadow} justify-center`,
     primarySolid: `bg-primary text-primary-foreground hover:bg-primary/90 focus:ring-primary ${defaultShadow} justify-center`,
     // For "View Complaints"
     secondary: `bg-[var(--button-secondary-bg)] text-[var(--button-secondary-text)] border border-[var(--button-secondary-border)] hover:bg-[var(--button-secondary-hover-bg)] focus:ring-primary ${lighterShadow} justify-center`,

@@ -102,7 +102,7 @@ export const RevenueBreakdownReport: React.FC<
       </div>
 
       {/* Display Total Revenue */}
-      <div className="bg-gray-100 rounded-xl p-6">
+      <div className="bg-surface min-h-60 rounded-xl p-6">
         {loading ? (
           <p className="text-center text-primary">Loading…</p>
         ) : revenue !== null ? (
