@@ -1,6 +1,5 @@
 @import "tailwindcss";
-@import "tailwindcss/theme"
- @custom-variant dark (&: is(.dark *));
+@import "tailwindcss/theme" @custom-variant dark (&: is(.dark *));
 
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
@@ -23,8 +22,7 @@
   --color-success: var(--zedle-status-success);
   --color-danger: var(--zedle-status-danger);
   --color-warning: var(--zedle-status-warning);
-  --color-info: var(--zedle-status-info); 
-
+  --color-info: var(--zedle-status-info);
 
   --gradient-purple-start: var(--zedle-gradient-purple-start);
   --gradient-purple-end: var(--zedle-gradient-purple-end);
@@ -55,14 +53,16 @@
 :root {
   --radius: 0.5rem;
   --zedle-bg-page: #f9fafb;
-  --zedle-bg-surface: #f2f3f3;
+  --zedle-bg-surface: #efefef;
   --zedle-bg-card: #fcf4fc;
   --zedle-bg-card-hover: #f7e6f7;
 
   --zedle-accent: #f4e8f5;
-  --zedle-text-primary: #3f0631;
-  --zedle-text-secondary: #901782eb;
-  --zedle-text-tertiary: #831f92;
+  --zedle-text-primary: #630052; /* all over the body*/
+  --zedle-text-secondary: #5c034c; /* */
+  --zedle-text-secondary-light: #b72fa9;
+
+  --zedle-text-tertiary: #560346;
   --zedle-text-highlight: #6d1a81;
   --zedle-text-muted: #9b8e98;
 
@@ -152,15 +152,10 @@
 }
 
 .sidebar {
-  background: linear-gradient(
-    to bottom,
-    var(--color-primary),
-    var(--zedle-gradient-purple-end)
-  );
+  background: linear-gradient(180deg, #3F0233 0%, #A50587 100%);
 }
 
-
-.chip{
+.chip {
   background-color: #e68aca;
   border: 1px solid #d8b4fe;
   color: #fff;
@@ -175,5 +170,4 @@
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
   transition: background-color 0.3s ease, color 0.3s ease;
   cursor: pointer;
-  
 }

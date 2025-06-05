@@ -140,7 +140,7 @@ const AssignOrdersPage: React.FC<AssignOrdersPageProps> = ({
             }}
             rowClassName={(row) =>
               !row.agent
-                ? "bg-green-50 relative"
+                ? "bg-[#FFCCCC42] relative"
                 : ""
             }
           />

@@ -47,7 +47,7 @@ const Header: React.FC<{ onMenuClick: () => void }> = ({ onMenuClick }) => {
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-20 gradient-top-to-bottom  h-16 flex items-center justify-between px-4 shadow-lg">
+      <header className="fixed top-0 left-0 right-0 z-20 bg-gradient-to-b from-[#3F0233] to-[#A50587] h-16 flex items-center justify-between px-4 shadow-lg">
         <button
           onClick={onMenuClick}
           className="p-2 rounded-lg text-white hover:bg-white/10 transition"

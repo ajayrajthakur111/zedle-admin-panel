@@ -52,7 +52,7 @@ const LoginPage: React.FC = () => {
       illustrationAlt="Login Illustration"
     >
       <div className="max-w-md mx-auto">
-        <h2 className="text-3xl font-bold mb-6 text-left text-purple">
+        <h2 className="text-3xl font-bold mb-6 text-left text-[#B72FA9]">
           Begin a Journey
         </h2>
         {error && (

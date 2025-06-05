@@ -165,7 +165,7 @@ const LiveGpsTrackingPage: React.FC<LiveGpsTrackingPageProps> = ({
               onPageChange: setPage,
             }}
             rowClassName={(row) =>
-              row.status === "In Progress" ? "bg-green-50 rounded-lg" : ""
+              row.status === "In Progress" ? "bg-[#FFCCCC42] rounded-lg" : ""
             }
           />
         ) : (

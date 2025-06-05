@@ -172,16 +172,16 @@ export default function Table<T extends Record<string, any>>({
         <thead>
           <tr>
             {columns.map((col, idx) => (
-              <th
+                <th
                 key={idx}
                 className={twMerge(
-                  "bg-card text-secondary text-sm font-semibold py-2 px-3 text-left ",
+                  "bg-[#FFF9FFB5] text-primary text-sm font-semibold py-2 px-3 text-left ",
                   col.width ?? "",
                   col.className ?? ""
                 )}
-              >
+                >
                 {col.header}
-              </th>
+                </th>
             ))}
           </tr>
         </thead>
@@ -208,7 +208,7 @@ export default function Table<T extends Record<string, any>>({
                   <td colSpan={columns.length} className="p-0">
                     <div
                       className={twMerge(
-                        "bg-[#ece8ec] rounded-md overflow-hidden",
+                        "bg-[#FFFFFF42] rounded-md overflow-hidden",
                         "flex w-full",
                         "shadow-sm", // optional: slight shadow per row
                         extraRowClass

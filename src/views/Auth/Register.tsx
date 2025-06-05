@@ -154,7 +154,7 @@ const RegisterPage: React.FC = () => {
             <button
               type="button"
               className="text-primary font-medium hover:underline"
-              onClick={() => navigate("/login")}
+              onClick={() => navigate("auth/login")}
             >
               Log In
             </button>
