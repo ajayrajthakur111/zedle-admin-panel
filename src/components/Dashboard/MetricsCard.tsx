@@ -1,16 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { getMetrics, type Metrics } from "@/api/authService";
 import image from "@/assets/dashboard/statsIllustration.svg";
+import totalOrdersIcon from "@/assets/dashboard/total_order_icon.svg";
+import totalEarningsIcon from "@/assets/dashboard/Total_Earnings.svg";
+import vendorsIcon from "@/assets/dashboard/active_vendor.svg";
+import activeDeliveryIcon from "@/assets/dashboard/delivery_agents.svg";
+import totalSalesIcon from "@/assets/dashboard/Sales_icon.svg";
 
-import {
-  ShoppingCart,
-  BadgeIndianRupee,
-  Store,
-  Users,
-  LineChart,
-  Loader2,
-  AlertTriangle,
-} from "lucide-react";
+import { Loader2, AlertTriangle } from "lucide-react";
 
 export const MetricsCard: React.FC = () => {
   const [metricsData, setMetricsData] = useState<Metrics | null>(null);
@@ -40,12 +37,12 @@ export const MetricsCard: React.FC = () => {
     value: string | number
   ) => (
     <li className="flex items-center py-2">
-      <div className="flex w-66 items-center justify-between bg-accent px-3 py-1 rounded">
+      <div className="flex w-66 items-center justify-between bg-[#5B104D0F] px-3 py-1 rounded">
         <div className="w-auto h-7 rounded-lg  flex items-center gap-2 justify-between mr-3 shrink-0">
           {icon}
-          <span className="text-sm font-semibold ">{label}</span>
+          <span className="text-xs font-semibold text-[#630853] ">{label}</span>
         </div>
-        <span className="text-sm font-bold  mr-2 whitespace-nowrap text-highlight">
+        <span className="text-xs font-bold  mr-4 whitespace-nowrap text-[#5E0474]">
           : {value}
         </span>
       </div>
@@ -54,7 +51,13 @@ export const MetricsCard: React.FC = () => {
 
   if (isLoading) {
     return (
-      <div className="bg-purple-50 rounded-xl shadow-lg p-6 flex flex-col items-center justify-center min-h-[340px] h-full">
+      <div
+        style={{
+          background:
+            "linear-gradient(119.81deg, rgba(255, 218, 254, 0.25) 26.02%, rgba(230, 166, 229, 0.12) 119.51%)",
+        }}
+        className="rounded-xl shadow-lg p-6 flex flex-col items-center justify-center min-h-[340px] h-full"
+      >
         <Loader2 className="h-8 w-8 text-primary animate-spin mb-2" />
         <span className="text-primary font-medium">Loading metrics…</span>
       </div>
@@ -63,7 +66,7 @@ export const MetricsCard: React.FC = () => {
 
   if (errorMessage || !metricsData) {
     return (
-      <div className="bg-card rounded-xl shadow-lg p-6 flex flex-col items-center justify-center text-center min-h-[340px] h-full">
+      <div className="bg-[#fcf3fc] rounded-xl shadow-lg p-6 flex flex-col items-center justify-center text-center min-h-[340px] h-full">
         <AlertTriangle className="h-10 w-10 text-destructive mb-3" />
         <p className="text-destructive font-semibold">Error</p>
         <p className="text-sm text-muted-foreground">
@@ -75,39 +78,44 @@ export const MetricsCard: React.FC = () => {
 
   return (
     <div
-      className="bg-card rounded-lg p-2 px-0 flex flex-col border-2 border-secondary relative justify-between h-70"
-      style={{ boxShadow: "12px 0 24px -4px rgba(0,0,0,0.15)" }}
+      className="bg-accent rounded-lg p-2 px-0 flex flex-col relative justify-between h-70 border-2 border-[#ca90c4]"
+     
     >
       <div className="absolute z-10">
         <ul className="space-y-0.5  ">
           {renderStatItem(
-            <ShoppingCart size={18} className="text-primary" />,
+            <img src={totalOrdersIcon} alt="total orders" />,
             "Total Orders",
             metricsData.totalOrders
           )}
           {renderStatItem(
-            <BadgeIndianRupee size={18} className="text-primary" />,
+            <img src={totalEarningsIcon} alt="total Earnings" />,
             "Total Earnings",
             `Rs ${metricsData.totalEarnings}/-`
           )}
           {renderStatItem(
-            <Store size={18} className="text-primary" />,
+            <img src={vendorsIcon} alt="Active Vendors" />,
             "Active Vendors",
             metricsData.activeVendors
           )}
           {renderStatItem(
-            <Users size={18} className="text-primary" />,
+            <img src={activeDeliveryIcon} alt="Active Delivery Agents" />,
             "Active Delivery Agents",
             metricsData.activeDeliveryAgents
           )}
           {renderStatItem(
-            <LineChart size={18} className="text-primary " />,
+            <img src={totalSalesIcon} alt="total Sales" />,
             "Total Sales",
             `Rs ${metricsData.totalSales}/-`
           )}
         </ul>
       </div>
-      <img src={image} className="absolute w-auto h-36 right-0 bottom-0 z-9" />
+      <div className="bg-[#95047B] w-8 h-10 absolute right-0  rounded-l z-10"></div>
+      <div className="bg-[#FAC3E1] w-8 h-10 absolute right-5 top-5 rounded z-8"></div>
+      <img
+        src={image}
+        className="absolute w-auto right-0 bottom-0 z-9 bg-transparent"
+      />
     </div>
   );
 };

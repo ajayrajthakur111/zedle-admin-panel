@@ -86,7 +86,7 @@ export const VendorChart: React.FC = () => {
     fetchData();
   }, []);
 
-  const cardContainerClasses = 'bg-purple-50 rounded-xl shadow-lg p-2  w-full flex flex-col border border-[#c072c6] mt-4';
+  const cardContainerClasses = 'bg-purple-50 rounded-xl shadow-lg p-2  w-full flex flex-col border border-[#ca90c4] mt-4';
   const chartAreaHeight = 'h-[350px]';
 
   if (loading) {

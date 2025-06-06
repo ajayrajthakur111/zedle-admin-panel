@@ -115,23 +115,23 @@ export const BookingsPage: React.FC = () => {
     {
       header: "Booking ID",
       accessor: "bookingId",
-      width: "w-[8vw]",
+      width: "w-[8%]",
     },
     {
       header: "Booking To",
       accessor: "bookingTo",
-      width: "w-[12vw]",
+      width: "w-[12%]",
     },
     {
       header: "Cost",
       accessor: "costPerPerson",
-      width: "w-[8vw]",
+      width: "w-[8%]",
       cell: (row) => row.costPerPerson,
     },
     {
       header: "Booked On",
       accessor: "bookingOn",
-      width: "w-[10vw]",
+      width: "w-[10%]",
       cell: (row) =>
         new Date(row.bookingOn).toLocaleDateString("en-GB", {
           day: "2-digit",
@@ -142,19 +142,19 @@ export const BookingsPage: React.FC = () => {
     {
       header: "Booked User",
       accessor: "customerPhoneNumber",
-      width: "w-[12vw]",
+      width: "w-[12%]",
       cell: (row) => row.customerPhoneNumber,
     },
     {
       header: "Vendor",
       accessor: "vendorId",
-      width: "w-[12vw]",
+      width: "w-[12%]",
       cell: (row) => row.vendorId,
     },
     {
       header: "Status",
       accessor: "status",
-      width: "w-[8vw]",
+      width: "w-[8%]",
       cell: (row) => {
         let color = "text-secondary";
         if (row.status === "Pending") color = "text-amber-500";
@@ -166,12 +166,12 @@ export const BookingsPage: React.FC = () => {
     {
       header: "Category",
       accessor: "category",
-      width: "w-[10vw]",
+      width: "w-[10%]",
       cell: (row) => <span className="text-primary">{row.category}</span>,
     },
     {
       header: "Info",
-      width: "w-[8vw]",
+      width: "w-[8%]",
       accessor: "bookingId", // dummy accessor to satisfy type
       cell: (row) => (
         <button
@@ -263,9 +263,8 @@ export const BookingsPage: React.FC = () => {
           </div>
 
           {/* Search Input */}
-          <div className="flex items-center space-x-2">
-            <div className="flex items-center space-x-1 border border-none rounded-md px-2 py-1 w-64 text-muted bg-white">
-              <Search className="h-4 w-4" />
+            <div className="flex items-center space-x-1 border-none rounded-md px-2 py-1 w-64 h-9 text-muted bg-white">
+                <Search className="h-4 w-4" />
               <input
                 type="text"
                 placeholder="Search Booking by ID"
@@ -275,7 +274,6 @@ export const BookingsPage: React.FC = () => {
                 disabled={loading}
               />
             </div>
-          </div>
         </div>
 
         {/* Show an error if API call fails */}

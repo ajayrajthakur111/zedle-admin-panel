@@ -1,10 +1,11 @@
 // src/components/MyProfile/EditProfileModal.tsx
 import { useState, type FC, type ChangeEvent } from "react";
 import { ModalWrapper } from "./ModalWrapper";
-import { Camera } from "lucide-react";
+import cameraIcon from "@/assets/profile/camera_icon.svg";
 import Button from "../ui/Button";
 import { useAdminStore, type AdminProfile } from "@/store/adminStore";
 import { updateProfilePicture, updateProfile } from "@/api/authService";
+import Input from "../ui/Input";
 
 // ---------------- EditProfileModal ----------------
 interface EditProfileModalProps {
@@ -86,12 +87,20 @@ export const EditProfileModal: FC<EditProfileModalProps> = ({
       onClose={onClose}
       showBack
       onBack={onBack}
-      maxW="max-w-lg"
     >
-      <div className="px-6 pb-6 h-[520px]">
-        <div className="flex gap-4">
-          {/* Readonly fields */}
-          <div className="flex-1 space-y-2">
+      <div
+        className="px-6 py-3 pb-6 h-[520px]"
+        style={{
+          maxWidth: "780px", // Adjust as needed for your layout, or remove if full-width
+          margin: "auto", // For centering if max-width is set
+          height: "560px",
+        }}
+      >
+        <div className="flex flex-col md:flex-row gap-x-8 gap-y-8 md:gap-y-0">
+          {/* Fields Column */}
+          <div className="flex flex-col gap-4 order-1 md:order-none">
+            {" "}
+            {/* Takes up remaining space */}
             {(
               [
                 { label: "Full Name", value: profile.name },
@@ -106,12 +115,12 @@ export const EditProfileModal: FC<EditProfileModalProps> = ({
               ] as const
             ).map(({ label, value }, idx) => (
               <div key={idx} className="relative">
-                <label className="absolute -top-2 right-3 bg-gradient-to-r from-[var(--gradient-purple-start)] to-[var(--gradient-purple-end)] text-primary-foreground hover:from-[var(--gradient-purple-hover-start)] hover:to-[var(--gradient-purple-hover-end)]  px-2 py-0.5 text-sm text-white rounded z-10">
+                <label className="absolute -top-2 right-3 bg-gradient-to-r from-[#711467] to-[#D725C5] px-2 py-0.5 text-xs text-white rounded z-10">
                   {label}
                 </label>
                 <Button
                   variant="secondary"
-                  className="w-full bg-white text-primary text-left py-2 justify-start"
+                  className="w-[300px] rounded text-primary text-sm text-left py-2 justify-start"
                   disabled
                 >
                   {value}
@@ -123,7 +132,7 @@ export const EditProfileModal: FC<EditProfileModalProps> = ({
           {/* Avatar upload */}
           <div className="flex flex-col items-center mt-10">
             <div className="relative group">
-              <div className="w-28 h-28 rounded-full border-2 border-white/40 overflow-hidden bg-gray-300">
+              <div className="w-36 h-36 rounded-full border-2 border-white/40 overflow-hidden bg-gray-300">
                 <img
                   src={
                     profile.avatarUrl ||
@@ -133,7 +142,7 @@ export const EditProfileModal: FC<EditProfileModalProps> = ({
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-black/50 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer">
-                  <Camera size={28} className="text-white" />
+                  <img src={cameraIcon} alt="camera icon" />{" "}
                   <input
                     type="file"
                     accept="image/*"
@@ -142,7 +151,7 @@ export const EditProfileModal: FC<EditProfileModalProps> = ({
                   />
                 </div>
               </div>
-              <span className="absolute -bottom-3 left-1/2 transform -translate-x-1/2 px-3 py-1 text-xs rounded-full border border-white/30 text-white">
+              <span className="absolute top-19.5 left-1/2 transform -translate-x-1/2 px-3 py-1 rounded-full text-bold text-sm text-white opacity-0 group-hover:opacity-100 transition-opacity">
                 Profile
               </span>
             </div>
@@ -150,7 +159,7 @@ export const EditProfileModal: FC<EditProfileModalProps> = ({
         </div>
 
         {/* Address Section */}
-        <div className="bg-[#8e1380] p-4 rounded-lg shadow-inner h-40 mt-4 space-y-2">
+        <div className="bg-[#45103F30] p-4 rounded-lg shadow-inner h-40 mt-4 space-y-2 ">
           <h3 className="text-white font-medium text-sm">Current Address</h3>
           <input
             type="text"
@@ -167,7 +176,7 @@ export const EditProfileModal: FC<EditProfileModalProps> = ({
             placeholder="Region, City - PIN"
           />
           <div className="flex items-center gap-2">
-            <input
+            <Input
               id="defaultAddress"
               type="checkbox"
               checked={isDefaultAddress}
@@ -184,7 +193,10 @@ export const EditProfileModal: FC<EditProfileModalProps> = ({
           <Button
             onClick={handleUpdate}
             disabled={isLoading}
-            className="mt-6 w-40 ml-24 text-white py-2 rounded font-semibold"
+            className="mt-5 w-80 ml-18   text-white py-2 rounded-lg font-semibold"
+            style={{
+              background: "linear-gradient(90deg, #510052 0%, #800A5C 100%)",
+            }}
           >
             {isLoading ? (
               <div className="flex items-center justify-center gap-2">

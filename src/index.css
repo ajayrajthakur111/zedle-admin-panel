@@ -9,12 +9,15 @@
 
   --color-background: var(--zedle-bg-page);
   --color-surface: var(--zedle-bg-surface);
+
+
   --color-card: var(--zedle-bg-card);
   --color-card-hover: var(--zedle-bg-card-hover);
   --color-accent: var(--zedle-accent);
 
   --color-primary: var(--zedle-text-primary);
   --color-secondary: var(--zedle-text-secondary);
+  --color-title: var(--zedle-text-title);
   --color-tertiary: var(--zedle-text-tertiary);
   --color-highlight: var(--zedle-text-highlight);
   --color-muted: var(--zedle-text-muted);
@@ -59,12 +62,14 @@
 
   --zedle-accent: #f4e8f5;
   --zedle-text-primary: #630052; /* all over the body*/
-  --zedle-text-secondary: #5c034c; /* */
+  --zedle-text-secondary:#540245; /**/
+    --zedle-text-title:#5C034C; /**/
+
   --zedle-text-secondary-light: #b72fa9;
 
   --zedle-text-tertiary: #560346;
   --zedle-text-highlight: #6d1a81;
-  --zedle-text-muted: #9b8e98;
+  --zedle-text-muted: #A7A7A7;
 
   --zedle-status-success: #00a716;
   --zedle-status-danger: #dc2626;
@@ -110,7 +115,8 @@
 
   body {
     @apply bg-background;
-    font-family: "Poppins", sans-serif;
+    font-family: "Inter", sans-serif;
+    font-size: 18px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     color: var(--zedle-text-primary);
@@ -151,7 +157,7 @@
   );
 }
 
-.sidebar {
+.sidebar,.navbar {
   background: linear-gradient(180deg, #3F0233 0%, #A50587 100%);
 }
 

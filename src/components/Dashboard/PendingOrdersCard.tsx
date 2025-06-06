@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { getPendingOrder, type PendingOrder } from "@/api/authService";
-import image from "@/assets/dashboard/cardboard-box-with-cargo-checklist-pencil.jpg";
+import image from "@/assets/dashboard/cardboard-box-with-cargo-checklist-pencil.svg";
 
 export const PendingOrdersCard: React.FC = () => {
   const [data, setData] = useState<PendingOrder | null>(null);
@@ -42,16 +42,16 @@ export const PendingOrdersCard: React.FC = () => {
   }
 
   return (
-    <div className="bg-outline relative rounded-lg border-1 border-[#c072c6] shadow-md p-4">
-      <h2 className="text-lg font-semibold text-secondary mb-2">
+    <div className="bg-white relative rounded-lg border-1 border-[#ca90c4] shadow-md p-4">
+      <h2 className="text-xl font-bold text-[#8E0976] mb-2">
         Pending Orders
       </h2>
 
       <p className="text-sm mt-4 flex flex-col gap-1">
-        <span className="font-semibold text-sm ">
+        <span className=" text-sm text-primary ">
           Order By: {data.orderBy}{" "}
         </span>
-        <span className="font-semibold text-sm text-red-600">
+        <span className="font-semibold text-sm text-[#E31616]">
           Due: {data.dueDate}
         </span>
       </p>

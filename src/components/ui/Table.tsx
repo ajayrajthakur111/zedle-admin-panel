@@ -1,24 +1,12 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 // src/components/ui/Table.tsx
 import React from "react";
 import { twMerge } from "tailwind-merge";
 
 export interface Column<T> {
-  /** Text to display in the header cell */
   header: string;
-  /**
-   * A simple key to read from each row object (e.g. "agentId"),
-   * OR any string if you plan to use `cell` instead.
-   */
   accessor?: keyof T | string;
-  /**
-   * If you need custom rendering (colored text, icons, buttons, etc.),
-   * supply a function here. It receives the entire row object.
-   */
   cell?: (row: T) => React.ReactNode;
-  /** Tailwind width (e.g. "w-24") or leave undefined for auto. */
   width?: string;
-  /** Additional classes for this column's cells. */
   className?: string;
 }
 
@@ -29,29 +17,13 @@ export interface PaginationProps {
 }
 
 interface TableProps<T> {
-  /** Column definitions */
   columns: Column<T>[];
-  /** Array of row objects */
   data: T[];
-  /**
-   * Optional function to add a class on each <tr>.
-   * (row, index) => string of Tailwind classes.
-   */
   rowClassName?: (row: T, index: number) => string;
-  /**
-   * If you want a footer (e.g. “Total Units: … / Total Amount: …”),
-   * pass any React node here. It will float at the bottom right.
-   */
   footer?: React.ReactNode;
-  /**
-   * If you need pagination controls, supply these props.
-   * A simple “Page <current> of <total>” with arrows.
-   */
   pagination?: PaginationProps;
-  /**
-   * Extra classes for the outermost table container, if desired.
-   */
   className?: string;
+  renderRowIcon?: (row: T, rowIndex: number) => React.ReactNode | null;
 }
 
 export function Pagination({
@@ -69,8 +41,9 @@ export function Pagination({
         &lt;
       </button>
       <span className="text-sm text-secondary">
-        Page <span className="font-semibold text-primary">{currentPage}</span>{" "}
-        of <span className="font-semibold text-primary">{totalPages}</span>
+        Page{" "}
+        <span className="font-semibold text-primary">{currentPage}</span> of{" "}
+        <span className="font-semibold text-primary">{totalPages}</span>
       </span>
       <button
         onClick={() => onPageChange(Math.min(totalPages, currentPage + 1))}
@@ -83,80 +56,7 @@ export function Pagination({
   );
 }
 
-/**
-  Generic, reusable Table component.
-  
-  USAGE EXAMPLE (TypeScript):
-  
-  interface AgentRow {
-    agentId: string;
-    name: string;
-    mobileNumber: string;
-    deliveryTime: string;
-    ratings: number;
-    earnings: number;
-  }
-  
-  const agentColumns: Column<AgentRow>[] = [
-    { header: 'Agent ID', accessor: 'agentId' },
-    { header: 'Name', accessor: 'name' },
-    { header: 'Mobile Number', accessor: 'mobileNumber' },
-    {
-      header: 'Delivery Time',
-      cell: (row) => {
-        const colorCls =
-          row.deliveryTime === 'On Time'
-            ? 'text-success'
-            : row.deliveryTime === 'Delayed'
-            ? 'text-amber-500'
-            : 'text-destructive';
-        return <span className={colorCls}>{row.deliveryTime}</span>;
-      },
-    },
-    {
-      header: 'Ratings (out of 5)',
-      cell: (row) => (
-        <span className="flex items-center">
-          {'★'.repeat(row.ratings) + '☆'.repeat(5 - row.ratings)}
-        </span>
-      ),
-    },
-    {
-      header: 'Earnings (In Rs)',
-      accessor: 'earnings',
-      cell: (row) => <span>{row.earnings.toLocaleString()},-/</span>,
-    },
-    {
-      header: 'Info',
-      cell: () => <a href="#" className="text-primary underline">View Details</a>,
-    },
-  ];
-  
-  function MyAgentTable() {
-    const [page, setPage] = useState(1);
-    // rows would come from API or mock
-    const rows: AgentRow[] = [ / ... / ];
-    return (
-      <Table
-        columns={agentColumns}
-        data={rows}
-        rowClassName={(row, idx) =>
-          row.deliveryTime === 'Highly Delayed' ? 'bg-red-50' : idx % 2 === 1 ? 'bg-surface' : 'bg-white'
-        }
-        footer={
-          <div className="text-right text-secondary font-medium">
-            Total Amount Collected: <span className="text-primary font-semibold">18,894/-</span>
-          </div>
-        }
-        pagination={{
-          currentPage: page,
-          totalPages: 6,
-          onPageChange: (p) => setPage(p),
-        }}
-      />
-    );
-  }
- */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default function Table<T extends Record<string, any>>({
   columns,
   data,
@@ -164,77 +64,102 @@ export default function Table<T extends Record<string, any>>({
   footer,
   pagination,
   className = "",
+  renderRowIcon,
 }: TableProps<T>) {
   return (
-    <div className={twMerge("w-full overflow-x-auto", className)}>
-      <table className="min-w-full border-separate border-spacing-y-1">
-        {/* HEADER */}
-        <thead>
-          <tr>
-            {columns.map((col, idx) => (
-                <th
-                key={idx}
-                className={twMerge(
-                  "bg-[#FFF9FFB5] text-primary text-sm font-semibold py-2 px-3 text-left ",
+    // 1) Make the very outermost wrapper allow visible overflow:
+    <div className={twMerge("relative overflow-visible", className)}>
+      {/*
+        2) **Remove** overflow-x-auto here. Instead, just let it be visible.
+           If you absolutely need horizontal scroll later, wrap the table 
+           in a separate container. For now, we need negative-left icons 
+           to show up, so this must be overflow-visible.
+      */}
+      <div className="w-full overflow-visible ">
+        <table className="min-w-full border-separate border-spacing-y-1">
+          {/* HEADER */}
+          <thead>
+            <tr>
+              <td colSpan={columns.length} className="p-0">
+              <div className="rounded-lg bg-[#FFF9FFB5] flex w-full h-12 items-center">
+                {columns.map((col, idx) => (
+                <div
+                  key={idx}
+                  className={twMerge(
+                  "flex-1 text-primary text-sm font-semibold text-left py-2 px-3",
                   col.width ?? "",
                   col.className ?? ""
-                )}
+                  )}
                 >
-                {col.header}
-                </th>
-            ))}
-          </tr>
-        </thead>
-
-        {/* BODY */}
-        <tbody>
-          {data.length === 0 ? (
-            <tr>
-              <td
-                colSpan={columns.length}
-                className="py-12 text-center text-muted text-base"
-              >
-                No Data Found
+                  {col.header}
+                </div>
+                ))}
+              </div>
               </td>
             </tr>
-          ) : (
-            data.map((row, rowIdx) => {
-              const extraRowClass = rowClassName
-                ? rowClassName(row, rowIdx)
-                : "";
+          </thead>
 
-              return (
-                <tr key={rowIdx}>
-                  <td colSpan={columns.length} className="p-0">
-                    <div
-                      className={twMerge(
-                        "bg-[#FFFFFF42] rounded-md overflow-hidden",
-                        "flex w-full",
-                        "shadow-sm", // optional: slight shadow per row
-                        extraRowClass
-                      )}
-                    >
-                      {columns.map((col, colIdx) => (
-                        <div
-                          key={colIdx}
-                          className={twMerge(
-                            "flex-1 py-3 px-4 text-sm text-primary",
-                            col.className
-                          )}
-                        >
-                          {col.cell
-                            ? col.cell(row)
-                            : row[col.accessor as keyof T]}
-                        </div>
-                      ))}
-                    </div>
-                  </td>
-                </tr>
-              );
-            })
-          )}
-        </tbody>
-      </table>
+          {/* BODY */}
+          <tbody>
+            {data.length === 0 ? (
+              <tr>
+                <td
+                  colSpan={columns.length}
+                  className="py-12 text-center text-muted text-base"
+                >
+                  No Data Found
+                </td>
+              </tr>
+            ) : (
+              data.map((row, rowIdx) => {
+                const extraRowClass = rowClassName
+                  ? rowClassName(row, rowIdx)
+                  : "";
+
+                return (
+                  // Mark each <tr> as relative, so its children’s absolute icons use it as a containing block:
+                  <tr key={rowIdx} className="relative">
+                    <td colSpan={columns.length} className="p-0">
+                      <div
+                        className={twMerge(
+                          // 3) The inner row container MUST be overflow-visible, not hidden:
+                          "bg-[#FFFFFF42] rounded-md overflow-visible items-center h-12",
+                          "flex w-full relative",
+                          "shadow-sm",
+                          extraRowClass
+                        )}
+                      >
+                        {/*
+                          4) Now your icon can sit at -left-8 without being clipped.
+                        */}
+                        {renderRowIcon && (
+                          <div className="absolute -left-10 top-1/2 transform -translate-y-1/2">
+                            {renderRowIcon(row, rowIdx)}
+                          </div>
+                        )}
+
+                        {columns.map((col, colIdx) => (
+                          <div
+                            key={colIdx}
+                            className={twMerge(
+                              "flex-1 py-3 px-4 text-sm  text-primary",
+                              col.className
+                            )}
+                          >
+                            {col.cell
+                              ? col.cell(row)
+                              : row[col.accessor as keyof T]}
+                          </div>
+                        ))}
+                      </div>
+                    </td>
+                  </tr>
+                );
+              })
+            )}
+          </tbody>
+        </table>
+      </div>
 
       {/* FOOTER (e.g. Totals) */}
       {footer && <div className="mt-4 ml-30 flex justify-start">{footer}</div>}

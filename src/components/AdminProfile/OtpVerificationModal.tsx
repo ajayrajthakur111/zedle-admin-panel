@@ -1,7 +1,7 @@
-import { useState, useEffect, type FC,type ChangeEvent } from "react"
+import { useState, useEffect, type FC, } from "react"
 import { ModalWrapper } from "./ModalWrapper"
-import Button from "../ui/Button"
 import { verifyOtp } from "@/api/authService"
+import { useAdminStore, type AdminProfile } from "@/store/adminStore"
 
 interface OtpVerificationModalProps {
   isOpen: boolean
@@ -24,7 +24,9 @@ export const OtpVerificationModal: FC<OtpVerificationModalProps> = ({
   const [canResend, setCanResend] = useState(false)
   const [isVerifying, setIsVerifying] = useState(false)
   const inputsRef = Array<HTMLInputElement | null>(length).fill(null)
+const profile = useAdminStore((state) => state.profile);
 
+  const { avatarUrl } = profile as AdminProfile;
   // reset on open
   useEffect(() => {
     if (isOpen) {
@@ -91,44 +93,73 @@ export const OtpVerificationModal: FC<OtpVerificationModalProps> = ({
       showBack
       onClose={onClose}
       onBack={onBack}
-      maxW="max-w-md"
+      avatarUrl={avatarUrl}
     >
-      <div className="bg-[#8e1380] rounded-2xl p-4 pb-8">
-        <p className="text-white/80 mb-4">
-          Enter the 6-digit code sent to <strong>{phone}</strong>
+       <div
+      className="font-['Inter'] text-white rounded-2xl shadow-xl m-2"
+      style={{
+        background: '#45103F30',
+        padding: '48px 32px', // Equivalent to py-12 px-8
+      }}
+    >
+      {/* Top Information Text */}
+      <div className="mb-8 text-left">
+        <p className="text-lg leading-tight ">
+          A 6 digit OTP code has been sent to{' '}
+          <strong className="font-semibold text-white">{phone}</strong>
         </p>
-        <div className="flex justify-center gap-2 mb-4">
-          {otpVals.map((v, i) => (
-            <input
-              key={i}
-              ref={el => { inputsRef[i] = el }}
-              type="text"
-              maxLength={1}
-              value={v}
-              inputMode="numeric"
-              onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                handleOtpChange(e.target.value, i)
-              }
-              onKeyDown={e => handleKey(e, i)}
-              className="w-10 h-12 sm:w-12 sm:h-14 bg-white/10 text-white text-xl font-semibold rounded focus:ring-1 focus:ring-white/60 text-center"
-            />
-          ))}
-        </div>
-        <div className="flex justify-between items-center px-4 mb-4">
-          <button
-            onClick={handleResend}
-            disabled={!canResend}
-            className={`text-sm underline ${
-              canResend ? "text-white" : "text-white/50 cursor-not-allowed"
-            }`}
-          >
-            Re-send Code {!canResend && `(${timer}s)`}
-          </button>
-          <Button onClick={submitOtp} disabled={isVerifying}>
-            {isVerifying ? "Verifying..." : "Verify"}
-          </Button>
-        </div>
+        <p className="text-sm leading-tight mt-1.5">
+          enter the code to continue..
+        </p>
       </div>
+
+      {/* Verification Code Label */}
+      <p className="text-base font-medium text-white mb-3 text-left">
+        Verification Code
+      </p>
+
+      {/* OTP Input Fields */}
+      <div className="flex justify-center gap-x-2 mb-6">
+        {otpVals.map((v, i) => (
+          <input
+            key={i}
+            ref={el => { inputsRef[i] = el; }}
+            type="text"
+            maxLength={1}
+            value={v}
+            inputMode="numeric"
+            onChange={(e) => handleOtpChange(e.target.value, i)}
+            onKeyDown={e => handleKey(e, i)}
+            className="w-12 h-14 bg-[#EEC4F23B] text-white text-2xl font-semibold rounded-lg text-center focus:ring-1 focus:ring-white/60 outline-none transition-all duration-150 ease-in-out"
+          />
+        ))}
+      </div>
+
+      {/* Re-send Code Link */}
+      <div className="text-right mb-10">
+        <button
+          onClick={handleResend}
+          disabled={!canResend}
+          className={`text-[13px] underline transition-opacity duration-150 ease-in-out ${
+            canResend ? "text-white hover:text-white/80" : "text-white/50 cursor-not-allowed"
+          }`}
+        >
+          Re-send Code {!canResend && `(${timer}s)`}
+        </button>
+      </div>
+
+      {/* SIGN UP Button */}
+      <button
+        onClick={submitOtp}
+        disabled={isVerifying}
+        className="w-full text-white text-sm font-bold py-4 rounded-lg uppercase tracking-wider transition-all duration-150 ease-in-out disabled:opacity-70 disabled:cursor-not-allowed"
+        style={{
+          background: 'linear-gradient(90deg, #510052 0%, #800A5C 100%)',
+        }}
+      >
+        {isVerifying ? "Verifying..." : "Verify"}
+      </button>
+    </div>
     </ModalWrapper>
   )
 }

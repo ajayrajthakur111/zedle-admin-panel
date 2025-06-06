@@ -4,8 +4,9 @@ import {
   getCompletedDeliveries,
   type CompletedDelivery,
 } from "@/api/authService";
-import { MapPin, Loader2, AlertTriangle } from "lucide-react";
+import {  Loader2, AlertTriangle } from "lucide-react";
 import { twMerge } from "tailwind-merge";
+import locationIcon from '@/assets/dashboard/Location_icon.svg'
 
 const getBadgeStyles = (
   badgeColor?: "red" | "gold" | "green",
@@ -13,16 +14,16 @@ const getBadgeStyles = (
 ): string => {
   console.log(badgeColor);
   if (badgeColor === "red" || (count !== undefined && count <= 300)) {
-    return "bg-danger text-white";
+    return "bg-[#BC0013] text-white";
   }
   if (
     badgeColor === "gold" ||
     (count !== undefined && count > 300 && count <= 1000)
   ) {
-    return "bg-warning text-white";
+    return "bg-[#D59813] text-white";
   }
   if (badgeColor === "green" || (count !== undefined && count > 1000)) {
-    return "bg-success text-white";
+    return "bg-[#00BC4E] text-white";
   }
   return "bg-info text-white";
 };
@@ -50,7 +51,7 @@ export const CompletedDeliveriesCard: React.FC = () => {
   }, []);
 
   const cardContainerClasses =
-    " rounded-xl shadow-lg p-3 w-full h-fit flex flex-col border-1 border-[#c072c6]";
+    " rounded-xl shadow-lg p-3 w-full h-fit flex flex-col border-1 border-[#ca90c4]";
   const minCardHeight = "min-h-[300px]";
 
   if (loading) {
@@ -105,14 +106,12 @@ export const CompletedDeliveriesCard: React.FC = () => {
             >
               <div className="flex flex-col gap-1">
                 <div className="flex  pb-1">
-                <MapPin size={18} className="text-destructive mr-1 shrink-0" />
-                  <p className="font-semibold text-sm text-primary">
+                  <img src={locationIcon} alt="location" />{" "}
+                  <p className="font-semibold text-sm text-[#7B108C]">
                     {delivery.location}
                   </p>
                 </div>
-                  <p className="text-xs  text-muted">
-                    Till {delivery.tillDate}
-                  </p>
+                <p className="text-xs  text-muted">Till {delivery.tillDate}</p>
               </div>
               <span
                 className={twMerge(

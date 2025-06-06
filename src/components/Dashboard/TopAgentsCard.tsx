@@ -41,8 +41,8 @@ export const TopAgentsCard: React.FC = () => {
   }
 
   return (
-    <div className="rounded-lg shadow-md p-4 mt-4 border-2 border-secondary">
-      <h2 className="text-lg font-poppins font-semibold text-primary text-center mb-4 pb-2 border-b border-primary/20">
+    <div className="rounded-lg shadow-md p-4 mt-4 border-2 border-[#ca90c4]">
+      <h2 className="text-lg font-poppins font-semibold text-primary text-center mb-4 pb-2 border-b border-[#D598D7]">
         Best 3 Delivery Agents</h2>
       <ul className="space-y-4">
         {data.map((agent) => (
@@ -54,7 +54,7 @@ export const TopAgentsCard: React.FC = () => {
                 className="h-12 w-12 rounded-full object-cover border border-border"
               />
               <div>
-                <p className="text-secondary font-semibold">{agent.name}</p>
+                <p className="text-[#7B108C] font-semibold">{agent.name}</p>
                 <p className="text-xs text-muted font-semibold">Location: {agent.location}</p>
               </div>
             </div>

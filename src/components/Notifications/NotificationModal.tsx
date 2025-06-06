@@ -1,5 +1,7 @@
 import React from "react";
-import { X, Users } from "lucide-react";
+import crossIcon from "@/assets/cross_icon.svg";
+import notificationTrainingIcon from "@/assets/header/notification_training_icon.svg";
+
 import Button from "../ui/Button";
 
 interface Props {
@@ -25,9 +27,9 @@ const NotificationModal: React.FC<Props> = ({
       <div className="fixed inset-0 bg-black/30" onClick={onClose} />
 
       {/* Modal */}
-      <div className="relative bg-white w-200 max-w-sm rounded-[var(--radius-lg)] shadow-lg overflow-hidden border border-gray-100">
+      <div className="relative bg-white w-[520] min-h-[400px] rounded-b-lg shadow-lg overflow-hidden border p-5 border-gray-100">
         {/* Header */}
-        <div className="flex items-center justify-between px-4 py-3 border-b border-gray-200">
+        <div className="flex items-center justify-between text-2xl p-3 border-b-3 border-[#C0C0C0BF]">
           <h2 className="text-[16px] font-semibold text-[var(--color-primary)]">
             Notifications
           </h2>
@@ -35,7 +37,7 @@ const NotificationModal: React.FC<Props> = ({
             onClick={onClose}
             className="text-[var(--color-primary)] p-1 hover:bg-gray-100 rounded-full"
           >
-            <X size={20} />
+            <img src={crossIcon} className="w-3 h-3" />
           </button>
         </div>
 
@@ -46,23 +48,23 @@ const NotificationModal: React.FC<Props> = ({
               <div className="animate-spin h-6 w-6 border-2 border-b-0 border-[var(--color-primary)] rounded-full" />
             </div>
           ) : count > 0 ? (
-            <div className="bg-[var(--color-primary)]/95 rounded-[var(--radius-md)] px-4 py-3 flex items-center gap-3 text-white">
-              <div className="bg-white/20 p-2 rounded-md">
-                <Users size={20} className="text-white" />
+            <div className="bg-[#742969] rounded-[var(--radius-md)] px-4 py-3 flex items-center gap-3 text-white">
+              <div className=" rounded-md">
+                <img src={notificationTrainingIcon} />
               </div>
               <div className="flex-1">
                 <p className="text-sm">
-                  <span className="text-lg font-bold mr-1">{count}</span>
+                  <span className="text-xl font-bold mr-1">{count}</span>
                   New Complaints Raised...!
                 </p>
               </div>
-              <Button
+                <Button
                 variant="secondary"
-                className="bg-white px-2 text-sm border border-white/30 w-auto"
+                className="bg-white text-xs whitespace-nowrap border border-white/30 w-auto p-2"
                 onClick={onView}
-              >
+                >
                 View Complaints
-              </Button>
+                </Button>
             </div>
           ) : (
             <div className="text-center text-gray-500 py-6">

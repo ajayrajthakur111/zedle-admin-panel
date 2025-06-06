@@ -87,17 +87,17 @@ const Button: React.FC<ButtonProps> = ({
   const lighterShadow = "shadow-sm hover:shadow-md";
 
   const variantStyles: Record<ButtonVariant, string> = {
-    primaryHorizontalGradient: `text-white bg-gradient-to-r from-[var(--gradient-purple-start)] to-[var(--gradient-purple-end)]  hover:from-[var(--gradient-purple-hover-start)] hover:to-[var(--gradient-purple-hover-end)] focus:ring-0  ${defaultShadow} justify-center`,
+    primaryHorizontalGradient: `text-white bg-gradient-to-r from-[#AD2595] to-[#630052]  hover:from-[var(--gradient-purple-hover-start)] hover:to-[var(--gradient-purple-hover-end)] focus:ring-0  ${defaultShadow} justify-center`,
     primarySolid: `bg-primary text-white hover:bg-[linear-gradient(92.43deg,#862874_2.04%,#20091C_148.13%)] focus:ring-primary ${defaultShadow} justify-center`,
     secondary: `bg-white text-[var(--button-secondary-text)] border hover:bg-[#FEF4FC] [border:linear-gradient(92.19deg,#5D034C_27.59%,#D003AB_134.39%)_1] focus:ring-primary ${lighterShadow} justify-center`,
-    successHoriZontalGradient: `bg-gradient-to-r from-[var(--gradient-green-start)] to-[var(--gradient-green-end)] text-success-foreground hover:from-[var(--gradient-green-hover-start)] hover:to-[var(--gradient-green-hover-end)] focus:ring-success ${defaultShadow} justify-center`,
+    successHoriZontalGradient: `bg-gradient-to-r from-[#0E630A] to-[#24C11C]text-success-foreground hover:from-[var(--gradient-green-hover-start)] hover:to-[var(--gradient-green-hover-end)] focus:ring-success ${defaultShadow} justify-center`,
     successSolidGradient: `bg-gradient-to-l from-[var(--gradient-green-start)] to-[var(--gradient-green-end)] text-success-foreground hover:from-[var(--gradient-green-hover-start)] hover:to-[var(--gradient-green-hover-end)] focus:ring-success ${defaultShadow} justify-center`,
     dangerSolid: `bg-destructive text-destructive-foreground hover:bg-destructive/90 focus:ring-destructive ${defaultShadow} justify-center`,
     infoSolid: `bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-500 ${defaultShadow} justify-center`,
     ghost: `bg-primary/20 text-primary hover:bg-primary/10 focus:ring-primary shadow-none active:translate-y-0 justify-center`,
     customLocation: `bg-green-100 text-primary hover:bg-green-200 focus:ring-primary font-semibold ${lighterShadow} justify-center`,
     dropdown: `bg-gradient-to-r from-[var(--gradient-purple-start)] to-[var(--gradient-purple-end)] text-primary-foreground hover:from-[var(--gradient-purple-hover-start)] hover:to-[var(--gradient-purple-hover-end)] focus:ring-primary ${defaultShadow} justify-between w-full`,
-    successSolid: `bg-green-700 text-white hover:bg-blue-700 focus:ring-blue-500 ${defaultShadow} justify-center`,
+    successSolid: `bg-[#00D138] text-white hover:bg-green-600 focus:ring-blue-500 ${defaultShadow} justify-center`,
   };
 
   const widthStyles = fullWidth && variant !== "dropdown" ? "w-full" : ""; // Dropdown handles its own fullWidth

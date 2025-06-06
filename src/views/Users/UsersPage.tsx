@@ -7,7 +7,7 @@ import React, {
   useMemo,
   useCallback,
 } from "react";
-import { Search, AlertTriangle, Trash2 } from "lucide-react";
+import { Search } from "lucide-react";
 import debounce from "lodash/debounce";
 import Table, { type Column } from "@/components/ui/Table";
 import Button from "@/components/ui/Button";
@@ -21,6 +21,8 @@ import {
 import UserDetailsModal from "@/components/Users/UserDetailsModal";
 import BlockUserModal from "@/components/Users/BlockConfirmModal";
 import DeleteUserModal from "@/components/Users/DeleteConfirmModal";
+import alertTriangle from "@/assets/users/warning-sign_5604456 1.svg";
+import trashIcon from "@/assets/trash_icon.svg";
 
 export const UsersPage: React.FC = () => {
   // ─────────────────────────────────────
@@ -40,9 +42,7 @@ export const UsersPage: React.FC = () => {
   const [detailsModalUserId, setDetailsModalUserId] = useState<string | null>(
     null
   );
-  const [blockModalUserId, setBlockModalUserId] = useState<string | null>(
-    null
-  );
+  const [blockModalUserId, setBlockModalUserId] = useState<string | null>(null);
   const [deleteModalUserId, setDeleteModalUserId] = useState<string | null>(
     null
   );
@@ -99,32 +99,10 @@ export const UsersPage: React.FC = () => {
   }, [page, searchTerm, showBlocked]);
 
   // ─────────────────────────────────────
-  // Column definitions:
-  //    - First column is always a fixed-width “icon placeholder” (4vw).
-  //    - Next columns (User ID, Name, Email, Mobile, Info).
-  //    - Last column “Action” is 8vw.
+  // Column definitions (NO placeholderColumn any more)
   // ─────────────────────────────────────
 
-  // 1) First column: either AlertTriangle (Active + policyViolated) or blank (Blocked)
-  const placeholderColumn: Column<User> = {
-    header: "",
-    accessor: "policyViolated",
-    width: "w-[2vw]",
-    cell: (row) =>
-      !showBlocked && row.policyViolated ? (
-        <button
-          className="p-1 text-red-600 hover:text-red-800 relative "
-          onClick={() => {
-            setBlockModalUserId(row.userId);
-          }}
-        >
-          <AlertTriangle size={18} className=""/>
-        </button>
-      ) : null,
-    className: "text-left w-[2vw]  ",
-  };
-
-  // 2) Common columns for both Active & Blocked
+  // 1) User ID, Name, Email, Mobile, Info
   const userIdColumn: Column<User> = {
     header: "User ID",
     accessor: "userId",
@@ -152,7 +130,7 @@ export const UsersPage: React.FC = () => {
     cell: (row) => (
       <button
         onClick={() => setDetailsModalUserId(row.userId)}
-        className="text-primary underline text-sm"
+        className="text-[#8F8F8F] underline text-sm"
       >
         View Details
       </button>
@@ -160,23 +138,25 @@ export const UsersPage: React.FC = () => {
     className: "text-center",
   };
 
-  // 3a) Action column for Active Users (“Delete”)
+  // 2a) Action column for Active Users (“Delete”)
   const activeActionColumn: Column<User> = {
     header: "Action",
     accessor: "userId",
     width: "w-[8vw]",
     cell: (row) => (
-      <button
-        onClick={() => setDeleteModalUserId(row.userId)}
-        className="text-red-600 hover:text-red-800 text-sm font-medium"
-      >
-        <Trash2 size={16}/>
-      </button>
+      <div className="flex justify-center ">
+        <button
+          onClick={() => setDeleteModalUserId(row.userId)}
+          className="flex justify-center items-center text-red-600 hover:text-red-800 text-sm font-medium bg-[#FFEEEE] w-15 rounded h-8"
+        >
+          <img src={trashIcon} alt="trash" />
+        </button>
+      </div>
     ),
-    className: "text-center",
+    className: "text-center ",
   };
 
-  // 3b) Action column for Blocked Users (“Unblock User”)
+  // 2b) Action column for Blocked Users (“Unblock User”)
   const blockedActionColumn: Column<User> = {
     header: "Action",
     accessor: "userId",
@@ -192,9 +172,8 @@ export const UsersPage: React.FC = () => {
     className: "text-left",
   };
 
-  // 4) Combine into two full sets of columns
+  // 3) Combine into two full sets of columns (no extra placeholder column)
   const activeColumns: Column<User>[] = [
-    placeholderColumn,
     userIdColumn,
     nameColumn,
     emailColumn,
@@ -204,7 +183,6 @@ export const UsersPage: React.FC = () => {
   ];
 
   const blockedColumns: Column<User>[] = [
-    placeholderColumn,
     userIdColumn,
     nameColumn,
     emailColumn,
@@ -274,65 +252,91 @@ export const UsersPage: React.FC = () => {
       {/* 1) Header: Title + Toggle Button */}
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-semibold text-primary">Users</h1>
-        <Button
-          variant="primaryHorizontalGradient"
-          onClick={() => {
-            setShowBlocked((prev) => !prev);
-            setPage(1);
-          }}
-        >
-          {showBlocked ? "Show Active Users" : "Blocked Users"}
-        </Button>
-      </div>
-
-      {/* 2) Info Row: Count & Search */}
-      <div className="flex items-center justify-between">
-        <div className="text-secondary text-lg font-semibold">
-          {showBlocked
-            ? `Blocked Users: ${totalCount}`
-            : `Active Users: ${totalCount}`}
-        </div>
-
-        {/* Search Box */}
-        <div className="flex items-center space-x-2 w-64" ref={searchRef}>
-          <div className="flex items-center space-x-1 bg-white rounded-md px-2 py-1 w-full">
-            <Search className="h-4 w-4 text-gray-400" />
-            <input
-              type="text"
-              placeholder="Search User"
-              value={searchInput}
-              onChange={handleSearchChange}
-              className="flex-grow text-sm text-primary focus:outline-none bg-transparent"
-              disabled={loading}
-            />
-          </div>
-        </div>
       </div>
 
       {/* 3) Main Table */}
-      <div className="bg-surface rounded-xl p-6">
+      <div className="bg-surface rounded-xl p-10 pr-7">
         {error && <p className="text-red-600 text-center mb-4">{error}</p>}
 
         {loading ? (
           <p className="text-primary text-center py-12">Loading…</p>
         ) : users.length > 0 ? (
-          <Table
-            columns={showBlocked ? blockedColumns : activeColumns}
-            data={users}
-            className="border-separate"
-            pagination={{
-              currentPage: page,
-              totalPages: Math.ceil(totalCount / 10),
-              onPageChange: (newPage) => {
-                setPage(newPage);
-                window.scrollTo({ top: 0, behavior: "smooth" });
-              },
-            }}
-            // Highlight “policy‐violated” rows only in Active Users view
-            rowClassName={(row) =>
-              !showBlocked && row.policyViolated ? "bg-red-100 rounded-lg" : ""
-            }
-          />
+          <>
+            <div className="flex items-center justify-between mb-8">
+              <div className="text-secondary text-lg font-semibold">
+                {showBlocked
+                  ? `Blocked Users: ${totalCount}`
+                  : `Active Users: ${totalCount}`}
+              </div>
+
+              {/* Search Box */}
+              <div
+                className="flex items-center space-x-2 w-auto h-9"
+                ref={searchRef}
+              >
+                
+                <button
+                  className={`w-[150px] text-sm font-semibold text-nowrap h-[39px] ${!showBlocked ? 'bg-[#FF3E41]' : 'bg-secondary'} text-white rounded transition-all duration-300 ease-out hover:opacity-90`}
+                  onClick={() => {
+                  setShowBlocked((prev) => !prev);
+                  setPage(1);
+                  }}
+                  style={{
+                  padding: '10px',
+                 
+                  }}
+                >
+                  {showBlocked ? "Active Users" : `Blocked Users `}
+                </button>
+                <div className="flex items-center space-x-1 bg-white rounded-md px-2 py-2 w-full">
+                  <Search className="h-4 w-4 text-gray-400" />
+                  <input
+                    type="text"
+                    placeholder="Search User"
+                    value={searchInput}
+                    onChange={handleSearchChange}
+                    className="flex-grow text-sm text-primary focus:outline-none bg-transparent"
+                    disabled={loading}
+                  />
+                </div>
+              </div>
+            </div>
+            <Table
+              columns={showBlocked ? blockedColumns : activeColumns}
+              data={users}
+              className="border-separate"
+              pagination={{
+                currentPage: page,
+                totalPages: Math.ceil(totalCount / 10),
+                onPageChange: (newPage) => {
+                  setPage(newPage);
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                },
+              }}
+              // Highlight “policy‐violated” rows only in Active Users view
+              rowClassName={(row) =>
+                 row.policyViolated
+                  ? "bg-[#FF436C8F] rounded-lg"
+                  : ""
+              }
+              // eslint-disable-next-line @typescript-eslint/no-unused-vars
+              renderRowIcon={(row, _idx) => {
+                 if (!showBlocked && row.policyViolated) {
+                   return (
+                     <button
+                       className="p-1 text-red-600 hover:text-red-800"
+                       onClick={() => {
+                         setBlockModalUserId(row.userId);
+                       }}
+                     >
+                       <img src={alertTriangle} alt="policy violated" />
+                     </button>
+                   );
+                 }
+                 return null;
+               }}
+            />
+          </>
         ) : (
           <p className="text-center text-muted py-12">
             No users {showBlocked ? "blocked" : "found"}.

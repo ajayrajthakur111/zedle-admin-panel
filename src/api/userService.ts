@@ -67,7 +67,7 @@ const _allUsers: User[] = [
         currentAddress: "#5/10 Colony, Another Region, City - PIN",
         isDefaultAddress: false,
         isBlocked: true,
-        policyViolated: false
+        policyViolated: true
 
     },
     {

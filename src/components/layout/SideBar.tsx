@@ -1,18 +1,17 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import {
-  LayoutDashboard,
-  ShoppingCart,
-  Calendar,
-  Users,
-  Store,
-  Truck,
-  Ticket,
-  Megaphone,
-  FileText,
-  Info,
-  Phone,
-} from "lucide-react";
+import LayoutDashboard from "@/assets/sidebar/dashboard_icon.svg";
+import Orders from "@/assets/sidebar/order_icon.svg";
+import Bookings from "@/assets/sidebar/booking_icon.svg";
+import Users from "@/assets/sidebar/users_icon.svg";
+import Vendors from "@/assets/sidebar/vendors_icon.svg";
+import Delivery_Agent from "@/assets/sidebar/delivery_agent_icon.svg";
+import Coupons from "@/assets/sidebar/coupons_icon.svg";
+
+import Promotions from "@/assets/sidebar/promotion_icon.svg";
+import Terms from "@/assets/sidebar/T&C_icon.svg";
+import About from "@/assets/sidebar/about_us_icon.svg";
+import Phone from "@/assets/sidebar/contact_us_icon.svg";
 
 interface SidebarProps {
   isCollapsed: boolean;
@@ -24,15 +23,15 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed }) => {
 
   const menuItems = [
     { icon: LayoutDashboard, label: "Dashboard", path: "" },
-    { icon: ShoppingCart, label: "Orders", path: "orders" },
-    { icon: Calendar, label: "Bookings", path: "bookings" },
+    { icon: Orders, label: "Orders", path: "orders" },
+    { icon: Bookings, label: "Bookings", path: "bookings" },
     { icon: Users, label: "Users", path: "users" },
-    { icon: Store, label: "Vendors", path: "vendors" },
-    { icon: Truck, label: "Delivery Agents", path: "delivery" },
-    { icon: Ticket, label: "Coupons", path: "coupons" },
-    { icon: Megaphone, label: "Promotions", path: "promotions" },
-    { icon: FileText, label: "Terms & Policies", path: "terms" },
-    { icon: Info, label: "About Us", path: "about" },
+    { icon: Vendors, label: "Vendors", path: "vendors" },
+    { icon: Delivery_Agent, label: "Delivery Agents", path: "delivery" },
+    { icon: Coupons, label: "Coupons", path: "coupons" },
+    { icon: Promotions, label: "Promotions", path: "promotions" },
+    { icon: Terms, label: "Terms & Policies", path: "terms" },
+    { icon: About, label: "About Us", path: "about" },
     { icon: Phone, label: "Contact Us", path: "contact" },
   ];
 
@@ -66,27 +65,32 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed }) => {
                   onClick={() => navigate(fullPath)}
                   className={`
                     w-full flex items-center gap-3 px-3 py-3 rounded-lg
-                    transition-all duration-400 relative group
+                    transition-all duration-300 relative group
                     ${
                       isActive
-                        ? "bg-primary text-white font-medium border-b-3 border-gray-300"
-                        : "hover:bg-primary text-white font-medium hover:border-b-3 border-gray-300 hover:text-white"
+                        ? "bg-[#45013059] text-lg text-white font-bold border-b-3 border-[#FFFFFFA8]"
+                        : "hover:bg-[#45013059] text-lg text-white font-medium hover:font-bold hover:border-b-3  border-[#FFFFFFA8]"
                     }
                   `}
                 >
-                  <Icon
+                  <img
+                    src={Icon}
+                    alt={label}
+                    className={`transition-transform duration-300 ${
+                      isActive ? "translate-x-2" : "group-hover:translate-x-2"
+                    }`}
+                  />
+                  {/* <Icon
                     size={20}
-                    className={`transition-transform duration-400 ${
+                    className={`transition-transform duration-300 ${
                       isActive 
                         ? "translate-x-2" 
                         : "group-hover:translate-x-2"
                     }`}
-                  />
+                  /> */}
                   <span
-                    className={`font-medium transition-transform duration-400 ${
-                      isActive 
-                        ? "translate-x-2" 
-                        : "group-hover:translate-x-2"
+                    className={` transition-transform duration-300 ${
+                      isActive ? "translate-x-2" : "group-hover:translate-x-2"
                     }`}
                   >
                     {label}
