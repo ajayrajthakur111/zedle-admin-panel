@@ -40,7 +40,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed }) => {
       className={`
         flex-shrink-0                  
         sticky top-16 z-20             
-        h-[calc(100vh-4rem)]         
+        h-[calc(100vh-4rem)]       
         sidebar
         text-white shadow-xl
         transition-all duration-300 ease-in-out
@@ -54,7 +54,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed }) => {
           ${isCollapsed ? "opacity-0" : "opacity-100"}
         `}
       >
-        <ul className="flex-1 space-y-1 px-3 overflow-y-auto">
+        <ul className="flex-1 space-y-1 px-3 overflow-y-hidden">
           {menuItems.map(({ icon: Icon, label, path }) => {
             const fullPath = `/dashboard${path ? `/${path}` : ""}`;
             const isActive = location.pathname === fullPath;
